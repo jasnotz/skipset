@@ -1,23 +1,43 @@
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+
 import "./style/style.css"
 
 function App() {
+    const [startColor, setStartColor] = useState('black');
+    const [endColor, setEndColor] = useState('black');
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setStartColor('black');
+            setEndColor('#9E7BB5');
+        }, 1000);
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
-        <motion.div
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh' }}
-        >
-            <motion.img
-                src="./src/asset/logo.png"
-                whileHover={{ scale: 1.1 }}
-                style={{ cursor: 'pointer' }}
-            />
-            <motion.p style={{ cursor: 'pointer' }}>
-                Your shortcut to Friendship
-            </motion.p>
-        </motion.div>
+        <AnimatePresence>
+            <motion.div
+                initial={{ background: `linear-gradient(to bottom, ${startColor}, ${endColor})`, opacity: 0 }}
+                animate={{ background: [`linear-gradient(to bottom, ${startColor}, ${endColor})`, `linear-gradient(to bottom, ${startColor}, ${endColor})`], opacity: 1 }}
+                transition={{ duration: 2 }}
+                style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh', position: 'absolute', width: '100%' }}
+            >
+                <motion.img
+                    src="./src/asset/logo.png"
+                    whileHover={{ scale: 1.1 }}
+                    style={{ cursor: 'pointer' }}
+                />
+                <motion.p
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 2 }}
+                    style={{ cursor: 'pointer', color: 'white' }}
+                >
+                    Your shortcut to Friendship, Coming Soon 🍭
+                </motion.p>
+            </motion.div>
+        </AnimatePresence>
     );
 }
 
