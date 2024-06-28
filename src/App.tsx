@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
+import logo_text from "./asset/logo.png";
 
 import "./style/style.css"
 
@@ -24,15 +25,18 @@ function App() {
                 style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh', position: 'absolute', width: '100%' }}
             >
                 <motion.img
-                    src="./src/asset/logo.png"
+                    src={logo_text}
                     whileHover={{ scale: 1.1 }}
                     style={{ cursor: 'pointer' }}
                 />
+
+                <br/>
+
                 <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 2 }}
-                    style={{ cursor: 'pointer', color: 'white' }}
+                    style={{ cursor: 'pointer', color: 'white', fontFamily: '"Montserrat", sans-serif' }}
                 >
                     Your shortcut to Friendship, Coming Soon 🍭
                 </motion.p>
